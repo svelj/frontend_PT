@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
 
     const fetchTransactions = () => {
         axios
-            .get(`http://localhost:8080/transaction/user/${userId}`)
+            .get(`${import.meta.env.VITE_REACT_APP_API_ENDPOINT}/transaction/user/${userId}`)
             .then((response) => {
                 setTransactions(response.data);
             })
@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
 
     const fetchBalance = () => {
         axios
-            .get(`http://localhost:8080/user/${userId}/balance`)
+            .get(`${import.meta.env.VITE_REACT_APP_API_ENDPOINT}/user/${userId}/balance`)
             .then((response) => {
                 setBalance(response.data);
             })

@@ -36,7 +36,7 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ onTransactionAdded }) =
         };
 
         // Send the request to the backend
-        axios.post('http://localhost:8080/transaction/add', newTransaction, {
+        axios.post(`${import.meta.env.VITE_REACT_APP_API_ENDPOINT}/transaction/add`, newTransaction, {
             headers: {
                 'Content-Type': 'application/json',
             },

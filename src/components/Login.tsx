@@ -16,7 +16,7 @@ const Login: React.FC = () => {
         };
 
         axios
-            .post('http://localhost:8080/auth/login', loginData)
+            .post(`${import.meta.env.VITE_REACT_APP_API_ENDPOINT}/auth/login`, loginData)
             .then((response) => {
                 // Store the userId in localStorage
                 localStorage.setItem('userId', response.data.id);

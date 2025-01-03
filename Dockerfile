@@ -1,19 +1,20 @@
-# Fetching the latest node image on alpine linux
-FROM node:alpine AS development
+FROM node:20.11.1-alpine3.19 AS build
 
-# Declaring env
-ENV NODE_ENV development
+WORKDIR /app
 
-# Setting up the work directory
-WORKDIR /react-app
-
-# Installing dependencies
-COPY ./package*.json /react-app
+COPY package.json ./
 
 RUN npm install
 
-# Copying all the files in our project
+ENV PATH /app/node_modules/.bin:$PATH
+
 COPY . .
 
-# Starting our application
-CMD ["vite"]
+RUN npm run build
+
+FROM nginx:1.25.4-alpine3.18
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /var/www/html/
+
+ENTRYPOINT ["nginx","-g","daemon off;"]

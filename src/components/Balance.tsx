@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 const Balance = ({ userId }) => {
     const [balance, setBalance] = useState(0.0);
     const [newBalance, setNewBalance] = useState("");
 
     useEffect(() => {
         // Fetch the user's balance on component mount
-        axios.get(`http://localhost:8080/user/${userId}/balance`)
+        axios.get(`${REACT_APP_API_ENDPOINT}/user/${userId}/balance`)
             .then((response) => setBalance(response.data))
             .catch((error) => console.error("Error fetching balance:", error));
     }, [userId]);
 
     const updateBalance = () => {
-        axios.put(`http://localhost:8080/user/${userId}/balance`, parseFloat(newBalance))
+        axios.put(`${import.meta.env.VITE_REACT_APP_API_ENDPOINT}/user/${userId}/balance`, parseFloat(newBalance))
             .then((response) => {
                 setBalance(response.data);
                 setNewBalance("");

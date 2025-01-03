@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+
 interface BalanceUpdateProps {
     userId: string;
     onBalanceUpdated: (newBalance: number) => void;
@@ -25,7 +27,7 @@ const BalanceUpdate: React.FC<BalanceUpdateProps> = ({ userId, onBalanceUpdated 
         // Update the balance
         axios
             .put(
-                `http://localhost:8080/user/${userId}/balance`,
+                `${import.meta.env.VITE_REACT_APP_API_ENDPOINT}/user/${userId}/balance`,
                 balanceValue , // Send the balance as a JSON object
                 {
                     headers: {
